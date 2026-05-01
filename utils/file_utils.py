@@ -40,7 +40,7 @@ multi-turn file handling:
 import json
 import logging
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Optional
 
@@ -469,7 +469,7 @@ def read_file_content(
         logger.debug(f"[FILES] File size for {file_path}: {file_size:,} bytes")
         if file_size > max_size:
             logger.debug(f"[FILES] File too large: {file_path} ({file_size:,} > {max_size:,} bytes)")
-            modified_at = datetime.fromtimestamp(stat_result.st_mtime, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")
+            modified_at = datetime.fromtimestamp(stat_result.st_mtime, tz=UTC).strftime("%Y-%m-%d %H:%M:%S %Z")
             content = (
                 f"\n--- FILE TOO LARGE: {file_path} (Last modified: {modified_at}) ---\n"
                 f"File size: {file_size:,} bytes (max: {max_size:,})\n"
@@ -502,7 +502,7 @@ def read_file_content(
         # NOTE: These markers ("--- BEGIN FILE: ... ---") are distinct from git diff markers
         # ("--- BEGIN DIFF: ... ---") to allow AI to distinguish between complete file content
         # vs. partial diff content when files appear in both sections
-        modified_at = datetime.fromtimestamp(stat_result.st_mtime, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S %Z")
+        modified_at = datetime.fromtimestamp(stat_result.st_mtime, tz=UTC).strftime("%Y-%m-%d %H:%M:%S %Z")
         formatted = (
             f"\n--- BEGIN FILE: {file_path} (Last modified: {modified_at}) ---\n"
             f"{file_content}\n"

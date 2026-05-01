@@ -107,7 +107,7 @@ context preservation and natural conversation understanding.
 import logging
 import os
 import uuid
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any, Optional
 
 from pydantic import BaseModel
@@ -240,7 +240,7 @@ def create_thread(tool_name: str, initial_request: dict[str, Any], parent_thread
         - Parent thread creates a chain for conversation history traversal
     """
     thread_id = str(uuid.uuid4())
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(UTC).isoformat()
 
     # Filter out non-serializable parameters to avoid JSON encoding issues
     filtered_context = {
@@ -365,7 +365,7 @@ def add_turn(
     turn = ConversationTurn(
         role=role,
         content=content,
-        timestamp=datetime.now(timezone.utc).isoformat(),
+        timestamp=datetime.now(UTC).isoformat(),
         files=files,  # Preserved for cross-tool file context
         images=images,  # Preserved for cross-tool visual context
         tool_name=tool_name,  # Track which tool generated this turn
@@ -375,7 +375,7 @@ def add_turn(
     )
 
     context.turns.append(turn)
-    context.last_updated_at = datetime.now(timezone.utc).isoformat()
+    context.last_updated_at = datetime.now(UTC).isoformat()
 
     # Save back to storage and refresh TTL
     try:

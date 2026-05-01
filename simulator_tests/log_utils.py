@@ -8,7 +8,7 @@ used across multiple simulator test files to reduce code duplication.
 import logging
 import re
 import subprocess
-from typing import Optional, Union
+from typing import Optional
 
 
 class LogUtils:
@@ -204,7 +204,7 @@ class LogUtils:
         return thread_data
 
     @classmethod
-    def extract_history_traversal_logs(cls, logs: str) -> list[dict[str, Union[str, int]]]:
+    def extract_history_traversal_logs(cls, logs: str) -> list[dict[str, str | int]]:
         """
         Extract conversation history traversal logs.
 
@@ -283,7 +283,7 @@ class LogUtils:
         return matches
 
     @classmethod
-    def get_log_file_info(cls) -> dict[str, dict[str, Union[str, int, bool]]]:
+    def get_log_file_info(cls) -> dict[str, dict[str, str | int | bool]]:
         """
         Get information about log files.
 
