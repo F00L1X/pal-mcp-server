@@ -2,13 +2,13 @@
 name = "pal-mcp-server"
 version = "9.8.2"
 description = "AI-powered MCP server with multiple model providers"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "mcp>=1.0.0",
-    "google-genai>=1.19.0",
-    "openai>=1.55.2",
-    "pydantic>=2.0.0",
-    "python-dotenv>=1.0.0",
+    "mcp>=1.27.0",
+    "google-genai>=1.74.0",
+    "openai>=2.33.0",
+    "pydantic>=2.13.0",
+    "python-dotenv>=1.2.0",
 ]
 
 [tool.setuptools.packages.find]
@@ -40,7 +40,7 @@ pal-mcp-server = "server:run"
 
 [tool.black]
 line-length = 120
-target-version = ['py39', 'py310', 'py311', 'py312', 'py313']
+target-version = ['py310', 'py311', 'py312', 'py313', 'py314']
 include = '\.pyi?$'
 extend-exclude = '''
 /(
@@ -71,7 +71,7 @@ line_length = 120
 skip_glob = ["venv/*", ".venv/*", ".pal_venv/*"]
 
 [tool.ruff]
-target-version = "py39"
+target-version = "py314"
 line-length = 120
 
 [tool.ruff.lint]
@@ -89,6 +89,8 @@ ignore = [
     "B008",  # do not perform function calls in argument defaults
     "C901",  # too complex
     "B904",  # exception handling with raise from
+    "UP037",  # quoted-annotation: keeping quotes preserves forward-ref safety without `from __future__ import annotations`
+    "UP045",  # non-pep604-annotation-optional: avoid rewriting Optional[X] -> X | None when X is a quoted forward-ref
 ]
 
 [tool.ruff.lint.per-file-ignores]
