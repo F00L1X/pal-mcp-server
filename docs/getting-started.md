@@ -35,6 +35,11 @@ You need at least one API key. Choose based on your needs:
 - Visit [X.AI Console](https://console.x.ai/)
 - Generate an API key for Grok models
 
+**Zhipu AI (Z.AI / GLM):**
+- Visit [Z.AI API Keys](https://z.ai/manage-apikey/apikey-list)
+- Generate an API key for GLM-5.1, GLM-4.7, GLM-4.6, GLM-4.5 access
+- Coding-plan keys: also set `ZHIPU_BASE_URL=https://api.z.ai/api/coding/paas/v4`
+
 **DIAL Platform:**
 - Visit [DIAL Platform](https://dialx.ai/)
 - Generate API key for vendor-agnostic model access
